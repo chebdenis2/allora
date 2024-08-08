@@ -59,19 +59,6 @@ sleep 2
 echo -e "${BOLD}${DARK_YELLOW}Checking docker version...${RESET}"
 execute_with_prompt 'docker version'
 echo
-
-echo -e "${BOLD}${DARK_YELLOW}Installing Docker Compose...${RESET}"
-VER=$(curl -s curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose | grep tag_name | cut -d '"' -f 4)
-echo
-execute_with_prompt 'sudo curl -L "https://github.com/docker/compose/releases/download/'"$VER"'/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
-echo
-execute_with_prompt 'sudo chmod +x /usr/local/bin/docker-compose'
-echo
-
-echo -e "${BOLD}${DARK_YELLOW}Checking docker-compose version...${RESET}"
-execute_with_prompt 'docker-compose --version'
-echo
-
 if ! grep -q '^docker:' /etc/group; then
     execute_with_prompt 'sudo groupadd docker'
     echo
